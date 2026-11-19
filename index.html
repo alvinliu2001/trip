@@ -12,7 +12,7 @@
 *{box-sizing:border-box}body{margin:0;background:#f3f3f3;color:var(--ink);font:16px/1.55 var(--sans)}button,a{touch-action:manipulation}button{font:inherit;color:inherit;cursor:pointer}a{color:var(--green)}:focus-visible{outline:3px solid #111;outline-offset:3px}button:disabled{cursor:default}[hidden]{display:none!important}
 .shell{max-width:var(--width);margin:auto;background:var(--paper);min-height:100dvh;padding-bottom:calc(98px + env(safe-area-inset-bottom));box-shadow:0 0 80px #10101012}
 header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px;min-height:64px}
-.brand{display:flex;gap:9px;align-items:center;font:850 18px/1 var(--sans);letter-spacing:.075em}.brand svg{width:31px;height:31px;flex:none}.identity{border:0;background:#fff;min-height:44px;border:1px solid var(--ink);border-radius:24px;padding:0 13px;display:inline-flex;gap:7px;align-items:center;white-space:nowrap;font-size:14px;font-weight:750}
+.brand{display:flex;align-items:center}.brand svg{width:31px;height:31px;flex:none}.identity{display:grid;place-items:center;width:44px;height:44px;flex:none;padding:0;border:1px solid var(--ink);border-radius:50%;background:var(--white)}
 .icon{width:21px;height:21px;flex:none;display:inline-block;vertical-align:middle}
 h1,h2,h3,p{margin:0}
 .intro{padding:16px clamp(16px,3vw,34px) 16px}
@@ -69,7 +69,7 @@ dialog{max-height:90dvh;max-width:calc(100vw - 26px);width:425px;border:1px soli
 .ticket{margin:16px 0 0;position:relative;background:var(--green);color:white;border-radius:18px;text-align:center;padding:25px 15px;overflow:hidden}.ticket .icon{width:34px;height:34px;margin-bottom:8px}.ticket h3{font-size:34px}.ticket .redeem{margin-top:17px;padding:14px 0 0;border-top:1px dashed #ffffffa0;font-size:18px}.ticket p{margin:6px 0}.empty{border:1px solid var(--edge);border-radius:12px;background:var(--white);padding:21px;color:var(--muted)}
 .gift-mark{width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:var(--tint);color:var(--green);margin-bottom:13px}.gift-mark .icon{width:27px;height:27px}.gift-content{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 @media(min-width:650px){.places{grid-template-columns:repeat(2,minmax(0,1fr))}.info-list{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.flight-card{grid-row:span 2}}
-@media(max-width:359px){.dates{padding-inline:14px}.brand{font-size:14px;gap:5px}.brand svg{width:24px;height:24px}.identity{padding-inline:9px}.weather{padding-inline:10px}.inner,.intro{padding-inline:14px}.place h3{font-size:22px}.map{padding-inline:9px}}
+@media(max-width:359px){.dates{padding-inline:14px}.brand svg{width:24px;height:24px}.weather{padding-inline:10px}.inner,.intro{padding-inline:14px}.place h3{font-size:22px}.map{padding-inline:9px}}
 @media(prefers-reduced-motion:no-preference){
   #main > .inner{animation:content-in 170ms ease-out both}
   dialog[open]{animation:dialog-in 240ms cubic-bezier(.2,.75,.25,1) both}
@@ -106,7 +106,7 @@ dialog{max-height:90dvh;max-width:calc(100vw - 26px);width:425px;border:1px soli
 <body>
 <div class="shell">
 <header>
-<div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="24" cy="24" r="20"/><path d="m15 33 5-13 13-5-5 13z" stroke-linejoin="round"/><path d="m20 20 8 8"/></svg>TRIP ASSISTANT</div>
+<div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="24" cy="24" r="20"/><path d="m15 33 5-13 13-5-5 13z" stroke-linejoin="round"/><path d="m20 20 8 8"/></svg></div>
 <button class="identity" id="identity" data-action="identity" aria-label="切換使用者"></button>
 </header>
 <main id="main"><section class="inner"><h1>沖繩旅遊助手</h1><p class="sub">請用支援 JavaScript 的瀏覽器或 HTML 檢視器開啟檔案，以查看行程和入境資料。</p></section></main>
@@ -395,7 +395,7 @@ for(const button of document.querySelectorAll('[data-tab]')){
 for(const button of document.querySelectorAll('.close')) button.innerHTML=icon('close');
 function render(){
  const identity=document.querySelector('#identity');
- identity.innerHTML=icon('person')+(people[person]?.name || '旅客');
+ identity.innerHTML=icon('person');
  identity.setAttribute('aria-label',person ? people[person].name+'，切換使用者' : '選擇旅客');
  document.querySelector('#who-close').hidden=!person;
  for(const button of document.querySelectorAll('[data-tab]')) button.setAttribute('aria-current',String(button.dataset.tab===tab));
