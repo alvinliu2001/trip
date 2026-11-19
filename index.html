@@ -331,7 +331,7 @@ function weatherCard(day){
 }
 function trip(){
  const day=days[dayIndex];
- const menu=`<section class="intro"><h1>${person?'Hi '+people[person].name:'選擇旅客'}</h1></section>
+ const menu=`<section class="intro"><h1>${person?people[person].name+'，早安':'選擇旅客'}</h1></section>
  <div class="dates" role="group" aria-label="切換行程日期"><div class="date-track">${[{day:'出發前'},...days].map((d,i)=>`<button type="button" data-day="${i-1}" aria-pressed="${dayIndex===i-1}" ${d.date===today()?'aria-current="date"':''}><strong>${d.day}</strong></button>`).join('')}</div></div>`;
  if(!day)return menu+prep();
  return menu+`
